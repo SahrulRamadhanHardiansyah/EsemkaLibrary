@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/beige_light"
+    tools:context=".MyProfileFragment">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/ivImage"
+        android:layout_width="370dp"
+        android:layout_height="370dp"
+        android:layout_gravity="center"
+        android:scaleType="centerCrop"
+        android:src="@drawable/photoprofiledefault"
+        app:shapeAppearanceOverlay="@style/CircleImage" />
+
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="150dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="-24dp"
+        android:layout_height="wrap_content"
+        android:text="Upload Photo"
+        android:textColor="@color/black"
+        android:backgroundTint="@color/beige_medium"
+        app:cornerRadius="6dp"
+        android:textSize="16sp"
+        android:id="@+id/btnUpload"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingHorizontal="12dp">
+
+        <TextView
+            android:id="@+id/tvName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Budi Purnomo"
+            android:textSize="28sp"
+            android:layout_gravity="center"/>
+
+        <TextView
+            android:id="@+id/tvEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="budi.purnomo@gmail.com"
+            android:textSize="18sp"
+            android:layout_gravity="center"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Logout"
+            android:textColor="@color/black"
+            android:backgroundTint="@color/beige_medium"
+            app:cornerRadius="6dp"
+            android:textSize="16sp"
+            android:id="@+id/btnLogout"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="My Borrowing History:"
+            android:layout_marginTop="12dp"
+            android:textSize="18sp"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/rvBorrowingHistory"/>
+    </LinearLayout>
+
+</LinearLayout>
