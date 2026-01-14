@@ -2,6 +2,7 @@ package com.example.esemkalibrary3
 
 import android.content.Context.MODE_PRIVATE
 import android.content.Intent
+import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
@@ -70,15 +71,26 @@ class MyProfileFragment : Fragment() {
             connBorrow.setRequestProperty("Authorization", "Bearer $token")
             connPhoto.setRequestProperty("Authorization", "Bearer $token")
 
-            if (connMe.responseCode == HttpURLConnection.HTTP_OK && connBorrow.responseCode == HttpURLConnection.HTTP_OK && connPhoto.responseCode == HttpURLConnection.HTTP_OK) {
+            if (connMe.responseCode == HttpURLConnection.HTTP_OK && connBorrow.responseCode == HttpURLConnection.HTTP_OK) {
                 val userData = JSONObject(connMe.getInputStream().bufferedReader().readText())
                 val borrowingData = JSONArray(connBorrow.getInputStream().bufferedReader().readText())
-                val bitmap = BitmapFactory.decodeStream(connPhoto.inputStream)
+
+                var bitmap: Bitmap? = null
+                try {
+                    if (connPhoto.responseCode == HttpURLConnection.HTTP_OK) {
+                        bitmap = BitmapFactory.decodeStream(connPhoto.inputStream)
+                    }
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
 
                 lifecycleScope.launch(Dispatchers.Main) {
                     binding.tvName.text = userData.getString("name")
                     binding.tvEmail.text = userData.getString("email")
-                    binding.ivImage.setImageBitmap(bitmap)
+
+                    if (bitmap != null) {
+                        binding.ivImage.setImageBitmap(bitmap)
+                    }
 
                     binding.rvBorrowingHistory.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
                     binding.rvBorrowingHistory.adapter = object : RecyclerView.Adapter<BorrowHistoryViewHolder>() {

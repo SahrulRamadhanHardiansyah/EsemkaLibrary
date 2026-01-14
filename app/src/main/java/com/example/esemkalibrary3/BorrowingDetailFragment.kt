@@ -91,7 +91,7 @@ class BorrowingDetailFragment : Fragment() {
                         }
 
                         override fun getItemCount(): Int {
-                            return data.length()
+                            return bookBorrowings.length()
                         }
                     }
                 }
